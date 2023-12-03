@@ -1,7 +1,10 @@
 from math import pi
 
 class Circle:
+
     def __init__(self, radius=1):
+        if radius < 0:
+            raise ValueError("Radius cannot be negative")
         self.radius = radius
         
     def __repr__(self):
@@ -13,6 +16,8 @@ class Circle:
 
     @radius.setter
     def radius(self, radius):
+        if radius < 0:
+            raise ValueError("Radius cannot be negative")
         self._radius = radius
 
     @property
@@ -21,11 +26,14 @@ class Circle:
 
     @diameter.setter
     def diameter(self, diameter):
+        if diameter < 0:
+            raise ValueError("Radius cannot be negative")
         self._radius = diameter / 2
 
     @property
     def area(self):
         return pi * self._radius ** 2
+
 
 c = Circle(5)
 print(c)
