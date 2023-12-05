@@ -8,22 +8,31 @@ class Point:
         return f"Point(x={self.x}, y={self.y}, z={self.z})"
 
     def __eq__(self, other):
+        if not isinstance(other, Point):
+            return NotImplemented
         return (self.x, self.y, self.z) == (other.x, other.y, other.z)
     
     def __add__(self, other):
-        return Point(self.x + other.x, self.y + other.y, self.z + other.z)
+        if not isinstance(other, Point):
+            return NotImplemented
+        return Point(self.x+other.x, self.y+other.y, self.z+other.z)
 
     def __sub__(self, other):
-        return Point(self.x - other.x, self.y - other.y, self.z - other.z)
+        if not isinstance(other, Point):
+            return NotImplemented
+        return Point(self.x-other.x, self.y-other.y, self.z-other.z)
     
     def __mul__(self, scalar):
-        return Point(self.x * scalar, self.y * scalar, self.z * scalar)
+        if not isinstance(scalar, (int, float)):
+            return NotImplemented
+        return Point(self.x*scalar, self.y*scalar, self.z*scalar)
 
-    def __rmul__(self, scalar):
-        return Point(self.x * scalar, self.y * scalar, self.z * scalar)
-
+    __rmul__ = __mul__
+  
     def __iter__(self):
-        return iter((self.x, self.y, self.z))
+        yield self.x
+        yield self.y
+        yield self.z
 
 p1 = Point(1, 2, 3)
 p2 = Point(1, 2, 3)
